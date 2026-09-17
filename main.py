@@ -142,7 +142,7 @@ def modify_transaction(filename: str, transaction_id: int) -> None:
 
 def view_summary(filename: str) -> None:
     """Display summary statistics for all transactions."""
-    pass
+    transactions = read_transactions(filename)
 
 
 def get_valid_date() -> str:
