@@ -3,6 +3,8 @@ from rich.console import Console
 from rich.table import Table
 from rich.rule import Rule
 
+console = Console()
+
 
 def read_transactions(filename: str) -> list[dict]:
     """Read transactions from a CSV file and return them as dictionaries."""
@@ -244,7 +246,6 @@ def get_valid_id(filename: str) -> int:
 
 def main() -> None:
     """Run the finance tracker menu and handle user input."""
-    console = Console()
 
     flag = False
     while not flag:
