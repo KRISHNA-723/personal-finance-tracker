@@ -142,7 +142,42 @@ def modify_transaction(filename: str, transaction_id: int) -> None:
 
 def view_summary(filename: str) -> None:
     """Display summary statistics for all transactions."""
-    transactions = read_transactions(filename)
+    transactions: list[dict] = read_transactions(filename)
+    amounts = []
+
+
+    console.print(Rule("Total Summary"))
+
+
+    for line in transactions:
+        try:
+            amount = float(line["amount"].strip("$£"))
+            amounts.append(amount)
+        except ValueError:
+            continue
+
+    if not amounts:
+        print("No transactions")
+        return
+
+
+    total = sum(amounts)
+    average_amount = total / len(amounts)
+    max_amount, min_amount = max(amounts), min(amounts)
+
+    total_str = f"£{total:,.2f}" if total >= 0 else f"-£{abs(total):,.2f}"
+    average_amount_str =f"£{average_amount:,.2f}" if average_amount >= 0 else f"-£{abs(average_amount):,.2f}"
+    max_str = f"£{max_amount:,.2f}" if max_amount >= 0 else f"-£{abs(max_amount):,.2f}"
+    min_str = f"£{min_amount:,.2f}" if min_amount >= 0 else f"-£{abs(min_amount):,.2f}"
+
+
+
+    print(f"Total spent: {total_str}")
+    print(f"Average spent: {average_amount_str}")
+    print(f"Maximum spent: {max_str}")
+    print(f"Minimum spent: {min_str}")
+
+    console.print(Rule())
 
 
 def get_valid_date() -> str:
