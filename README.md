@@ -1,4 +1,4 @@
-# Finance Tracker
+# Personal Finance Tracker
 
 A command-line finance tracker in Python.
 
